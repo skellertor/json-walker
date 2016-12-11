@@ -5,8 +5,7 @@ module.exports.findObjectsByKey =  function(tag, json, results, done) {
             if (json[keys[i]] instanceof Object && keys[i] === tag) {
                 results.push(json[keys[i]])
             }
-            this.findObjectsByKey(tag, json[keys[i]], results, function (err, res) {
-            })
+            this.findObjectsByKey(tag, json[keys[i]], results, function (err, res) {})
         }
     }
     done(null, results);
@@ -19,8 +18,7 @@ module.exports.findArraysByKey = function(tag, json, results, done) {
             if (json[keys[i]] instanceof Array && keys[i] === tag) {
                 results.push(json[keys[i]])
             }
-            this.findArraysByKey(tag, json[keys[i]], results, function (err, res) {
-            })
+            this.findArraysByKey(tag, json[keys[i]], results, function (err, res) {})
         }
     }
     done(null, results);

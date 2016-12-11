@@ -1,0 +1,23 @@
+{
+  "name": "json-walker",
+  "version": "1.0.0",
+  "description": "walks json object to find property",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skellertor/json-walker.git"
+  },
+  "keywords": [
+    "json",
+    "walk"
+  ],
+  "author": "skellertor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skellertor/json-walker/issues"
+  },
+  "homepage": "https://github.com/skellertor/json-walker#readme"
+}
