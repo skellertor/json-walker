@@ -7,7 +7,8 @@ let permitted = function (tag) {
     return true;
 };
 
-module.exports.findObjectsByKey =  function(tag, json, results, done) {
+module.exports.findObjectsByKey =  function(tag, json, done, results) {
+    results = results || [];
     if(!permitted(tag)){
         return done(new Error('First argument must be a string'), null);
     }
@@ -26,14 +27,15 @@ module.exports.findObjectsByKey =  function(tag, json, results, done) {
             if (!(json[keys[i]] instanceof Array) && keys[i] === tag) {
                 results.push(json[keys[i]])
             }
-            this.findObjectsByKey(tag, json[keys[i]], results, function (err, res) {})
+            this.findObjectsByKey(tag, json[keys[i]], function (err, res) {}, results)
         }
     }
     done(null, results);
 
 };
 
-module.exports.findArraysByKey = function(tag, json, results, done) {
+module.exports.findArraysByKey = function(tag, json, done, results) {
+    results = results || [];
     if(!permitted(tag)){
         return done(new Error('First argument must be a string'), null);
     }
@@ -52,13 +54,14 @@ module.exports.findArraysByKey = function(tag, json, results, done) {
             if (json[keys[i]] instanceof Array && keys[i] === tag) {
                 results.push(json[keys[i]])
             }
-            this.findArraysByKey(tag, json[keys[i]], results, function (err, res) {})
+            this.findArraysByKey(tag, json[keys[i]], function (err, res) {})
         }
     }
     done(null, results);
 };
 
-module.exports.findStringsByKey = function (tag, json, results, done) {
+module.exports.findStringsByKey = function (tag, json, done, results) {
+    results = results || [];
     if(!permitted(tag)){
         return done(new Error('First argument must be a string'), null);
     }
@@ -75,7 +78,7 @@ module.exports.findStringsByKey = function (tag, json, results, done) {
     for (let i = 0; i < keys.length; i++) {
         let temp = json[keys[i]];
         if (typeof temp === 'object') {
-            this.findStringsByKey(tag, json[keys[i]], results, function (err, res) {})
+            this.findStringsByKey(tag, json[keys[i]], function (err, res) {})
         } else if((typeof temp === 'string') && keys[i] === tag){
             results.push(json[keys[i]]);
         }
@@ -83,7 +86,8 @@ module.exports.findStringsByKey = function (tag, json, results, done) {
     done(null, results);
 };
 
-module.exports.findNumbersByKey = function (tag, json, results, done) {
+module.exports.findNumbersByKey = function (tag, json, done, results) {
+    results = results || [];
     if(!permitted(tag)){
         return done(new Error('First argument must be a string'), null);
     }
@@ -100,7 +104,7 @@ module.exports.findNumbersByKey = function (tag, json, results, done) {
     for (let i = 0; i < keys.length; i++) {
         let temp = json[keys[i]];
         if (typeof temp === 'object') {
-            this.findNumbersByKey(tag, json[keys[i]], results, function (err, res) {})
+            this.findNumbersByKey(tag, json[keys[i]], function (err, res) {})
         } else if((typeof temp === 'number') && keys[i] === tag){
             results.push(json[keys[i]]);
         }

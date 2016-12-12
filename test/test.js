@@ -11,7 +11,7 @@ let expect = require('expect'),
 describe('findObjectsByKey()', function () {
     describe('Top level', function () {
         it('should find object with the property name === `data`', function (done) {
-            lib.findObjectsByKey('data', json.topObject, [], function (err, results) {
+            lib.findObjectsByKey('data', json.topObject, function (err, results) {
                 results.forEach(function (obj) {
                     expect(obj).toBeAn(Object);
                     expect(obj).toNotBeAn(Array);
@@ -23,7 +23,7 @@ describe('findObjectsByKey()', function () {
     });
     describe('Nested', function () {
         it('should find nested objects with the property name === `data`', function (done) {
-            lib.findObjectsByKey('data', json.nested, [], function (err, results) {
+            lib.findObjectsByKey('data', json.nested, function (err, results) {
                 results.forEach(function (obj) {
                     expect(obj).toBeAn(Object);
                     expect(obj).toNotBeAn(Array);
@@ -33,7 +33,7 @@ describe('findObjectsByKey()', function () {
             });
         });
         it('should find objects within an array with the property name === `data`', function (done) {
-            lib.findObjectsByKey('data', json.inArray, [], function (err, results) {
+            lib.findObjectsByKey('data', json.inArray, function (err, results) {
                 results.forEach(function (obj) {
                     expect(obj).toBeAn(Object);
                     expect(obj).toNotBeAn(Array);
@@ -45,7 +45,7 @@ describe('findObjectsByKey()', function () {
     });
     describe('json object undefined', function () {
         it('should return error', function (done) {
-            lib.findObjectsByKey('data', json.undefined(), [], function (err, results) {
+            lib.findObjectsByKey('data', json.undefined(), function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
@@ -54,7 +54,7 @@ describe('findObjectsByKey()', function () {
     });
     describe('json object null', function () {
         it('should return error', function (done) {
-            lib.findObjectsByKey('data', json.null, [], function (err, results) {
+            lib.findObjectsByKey('data', json.null, function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
@@ -63,7 +63,7 @@ describe('findObjectsByKey()', function () {
     });
     describe('json object a number', function () {
         it('should return error', function (done) {
-            lib.findObjectsByKey('data', 2, [], function (err, results) {
+            lib.findObjectsByKey('data', 2, function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
@@ -73,7 +73,7 @@ describe('findObjectsByKey()', function () {
 
     describe('json object a string', function () {
         it('should return error', function (done) {
-            lib.findObjectsByKey('data', '', [], function (err, results) {
+            lib.findObjectsByKey('data', '', function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
@@ -89,7 +89,7 @@ describe('findObjectsByKey()', function () {
 describe('findArraysByKey()', function () {
     describe('Top level', function () {
         it('should find array with the property name === `data`', function (done) {
-            lib.findArraysByKey('data', json.topArray, [], function (err, results) {
+            lib.findArraysByKey('data', json.topArray, function (err, results) {
                 results.forEach(function (arry) {
                     expect(arry).toBeAn(Array);
                 });
@@ -100,7 +100,7 @@ describe('findArraysByKey()', function () {
     });
     describe('Nested', function () {
         it('should find nested arrays with the property name === `data`', function (done) {
-            lib.findArraysByKey('data', json.nested, [], function (err, results) {
+            lib.findArraysByKey('data', json.nested, function (err, results) {
                 results.forEach(function (arry) {
                     expect(arry).toBeAn(Array);
                 });
@@ -109,7 +109,7 @@ describe('findArraysByKey()', function () {
             });
         });
         it('should find arrays within an array with the property name === `data`', function (done) {
-            lib.findArraysByKey('data', json.inArray, [], function (err, results) {
+            lib.findArraysByKey('data', json.inArray, function (err, results) {
                 results.forEach(function (arry) {
                     expect(arry).toBeAn(Array);
                 });
@@ -120,7 +120,7 @@ describe('findArraysByKey()', function () {
     });
     describe('json object undefined', function () {
         it('should return error', function (done) {
-            lib.findArraysByKey('data', json.undefined(), [], function (err, results) {
+            lib.findArraysByKey('data', json.undefined(),  function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
@@ -129,7 +129,7 @@ describe('findArraysByKey()', function () {
     });
     describe('json object null', function () {
         it('should return error', function (done) {
-            lib.findArraysByKey('data', json.null, [], function (err, results) {
+            lib.findArraysByKey('data', json.null,  function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
@@ -145,7 +145,7 @@ describe('findArraysByKey()', function () {
 describe('findStringsByKey()', function () {
     describe('Top level', function () {
         it('should find a string with the property name === `data`', function (done) {
-            lib.findStringsByKey('data', json.topString, [], function (err, results) {
+            lib.findStringsByKey('data', json.topString,  function (err, results) {
                 results.forEach(function (str) {
                     expect(str).toBeAn('string');
                     expect(str).toMatch(/js/);
@@ -157,7 +157,7 @@ describe('findStringsByKey()', function () {
     });
     describe('Nested', function () {
         it('should find nested strings with the property type === `data`', function (done) {
-            lib.findStringsByKey('data', json.nested, [], function (err, results) {
+            lib.findStringsByKey('data', json.nested,  function (err, results) {
                 results.forEach(function (str) {
                     expect(str).toBeAn('string');
                     expect(str).toMatch(/js/);
@@ -167,7 +167,7 @@ describe('findStringsByKey()', function () {
             });
         });
         it('should find string within an array with the property type === `data`', function (done) {
-            lib.findStringsByKey('data', json.inArray, [], function (err, results) {
+            lib.findStringsByKey('data', json.inArray,  function (err, results) {
                 results.forEach(function (str) {
                     expect(str).toBeAn('string');
                 });
@@ -179,7 +179,7 @@ describe('findStringsByKey()', function () {
 
     describe('json object undefined', function () {
         it('should return error', function (done) {
-            lib.findStringsByKey('data', json.undefined(), [], function (err, results) {
+            lib.findStringsByKey('data', json.undefined(),  function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
@@ -188,7 +188,7 @@ describe('findStringsByKey()', function () {
     });
     describe('json object null', function () {
         it('should return error', function (done) {
-            lib.findStringsByKey('data', json.null, [], function (err, results) {
+            lib.findStringsByKey('data', json.null,  function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
@@ -204,7 +204,7 @@ describe('findStringsByKey()', function () {
 describe('findNumbersByKey()', function () {
     describe('Top level', function () {
         it('should find a number with the property name === `data`', function (done) {
-            lib.findNumbersByKey('data', json.topNumber, [], function (err, results) {
+            lib.findNumbersByKey('data', json.topNumber,  function (err, results) {
                 results.forEach(function (num) {
                     expect(num).toBeAn('number');
                     expect(num).toMatch(15);
@@ -216,7 +216,7 @@ describe('findNumbersByKey()', function () {
     });
     describe('Nested', function () {
         it('should find nested numbers with the property type === `data`', function (done) {
-            lib.findNumbersByKey('data', json.nested, [], function (err, results) {
+            lib.findNumbersByKey('data', json.nested,  function (err, results) {
                 results.forEach(function (num) {
                     expect(num).toBeAn('number');
                     expect(num).toMatch(15);
@@ -226,7 +226,7 @@ describe('findNumbersByKey()', function () {
             });
         });
         it('should find number within an array with the property type === `data`', function (done) {
-            lib.findNumbersByKey('data', json.inArray, [], function (err, results) {
+            lib.findNumbersByKey('data', json.inArray,  function (err, results) {
                 results.forEach(function (num) {
                     expect(num).toBeAn('number');
                 });
@@ -238,7 +238,7 @@ describe('findNumbersByKey()', function () {
 
     describe('json object undefined', function () {
         it('should return error', function (done) {
-            lib.findNumbersByKey('data', json.undefined(), [], function (err, results) {
+            lib.findNumbersByKey('data', json.undefined(),  function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
@@ -247,7 +247,7 @@ describe('findNumbersByKey()', function () {
     });
     describe('json object null', function () {
         it('should return error', function (done) {
-            lib.findNumbersByKey('data', json.null, [], function (err, results) {
+            lib.findNumbersByKey('data', json.null,  function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();
