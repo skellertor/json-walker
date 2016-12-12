@@ -1,8 +1,22 @@
 'use strict';
 
+let permitted = function (tag) {
+    if(typeof tag !== 'string'){
+        return false;
+    }
+    return true;
+};
+
 module.exports.findObjectsByKey =  function(tag, json, results, done) {
-    let keys;
+    if(!permitted(tag)){
+        return done(new Error('First argument must be a string'), null);
+    }
+    let keys,
+        type = typeof json;
     try {
+        if(type === 'string' || type === 'number' || type === 'function'){
+            throw new Error('Second argument must be an Array or Object');
+        }
         keys = Object.keys(json);
     } catch (err) {
         return done(err, null);
@@ -20,8 +34,15 @@ module.exports.findObjectsByKey =  function(tag, json, results, done) {
 };
 
 module.exports.findArraysByKey = function(tag, json, results, done) {
-    let keys;
+    if(!permitted(tag)){
+        return done(new Error('First argument must be a string'), null);
+    }
+    let keys,
+        type = typeof json;
     try {
+        if(type === 'string' || type === 'number' || type === 'function'){
+            throw new Error('Second argument must be an Array or Object');
+        }
         keys = Object.keys(json);
     } catch (err) {
         return done(err, null);
@@ -38,8 +59,15 @@ module.exports.findArraysByKey = function(tag, json, results, done) {
 };
 
 module.exports.findStringsByKey = function (tag, json, results, done) {
-    let keys;
+    if(!permitted(tag)){
+        return done(new Error('First argument must be a string'), null);
+    }
+    let keys,
+        type = typeof json;
     try {
+        if(type === 'string' || type === 'number' || type === 'function'){
+            throw new Error('Second argument must be an Array or Object');
+        }
         keys = Object.keys(json);
     } catch (err){
         return done(err, null);
@@ -55,21 +83,46 @@ module.exports.findStringsByKey = function (tag, json, results, done) {
     done(null, results);
 };
 
-module.exports.findAllByKey = function(tag, json, results, done) {
-    let keys;
+module.exports.findNumbersByKey = function (tag, json, results, done) {
+    if(!permitted(tag)){
+        return done(new Error('First argument must be a string'), null);
+    }
+    let keys,
+        type = typeof json;
     try {
+        if(type === 'string' || type === 'number' || type === 'function'){
+            throw new Error('Second argument must be an Array or Object');
+        }
         keys = Object.keys(json);
     } catch (err){
         return done(err, null);
     }
     for (let i = 0; i < keys.length; i++) {
-        if(keys[i] === tag){
-            results.push(json[keys[i]])
-        }
         let temp = json[keys[i]];
         if (typeof temp === 'object') {
-            this.findAllByKey(tag, json[keys[i]], results, function (err, res) {})
+            this.findNumbersByKey(tag, json[keys[i]], results, function (err, res) {})
+        } else if((typeof temp === 'number') && keys[i] === tag){
+            results.push(json[keys[i]]);
         }
     }
     done(null, results);
 };
+
+// module.exports.findAllByKey = function(tag, json, results, done) {
+//     let keys;
+//     try {
+//         keys = Object.keys(json);
+//     } catch (err){
+//         return done(err, null);
+//     }
+//     for (let i = 0; i < keys.length; i++) {
+//         if(keys[i] === tag){
+//             results.push(json[keys[i]])
+//         }
+//         let temp = json[keys[i]];
+//         if (typeof temp === 'object') {
+//             this.findAllByKey(tag, json[keys[i]], results, function (err, res) {})
+//         }
+//     }
+//     done(null, results);
+// };

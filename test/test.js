@@ -61,6 +61,25 @@ describe('findObjectsByKey()', function () {
             });
         });
     });
+    describe('json object a number', function () {
+        it('should return error', function (done) {
+            lib.findObjectsByKey('data', 2, [], function (err, results) {
+                expect(err).toBeTruthy();
+                expect(results).toBeFalsy();
+                done();
+            });
+        });
+    });
+
+    describe('json object a string', function () {
+        it('should return error', function (done) {
+            lib.findObjectsByKey('data', '', [], function (err, results) {
+                expect(err).toBeTruthy();
+                expect(results).toBeFalsy();
+                done();
+            });
+        });
+    });
 });
 
 /******************************************
@@ -170,6 +189,65 @@ describe('findStringsByKey()', function () {
     describe('json object null', function () {
         it('should return error', function (done) {
             lib.findStringsByKey('data', json.null, [], function (err, results) {
+                expect(err).toBeTruthy();
+                expect(results).toBeFalsy();
+                done();
+            });
+        });
+    });
+});
+
+/*******************************************
+ * Section for findNumbersByKey() function *
+ *******************************************/
+
+describe('findNumbersByKey()', function () {
+    describe('Top level', function () {
+        it('should find a number with the property name === `data`', function (done) {
+            lib.findNumbersByKey('data', json.topNumber, [], function (err, results) {
+                results.forEach(function (num) {
+                    expect(num).toBeAn('number');
+                    expect(num).toMatch(15);
+                });
+                expect(results.length).toBeLessThanOrEqualTo(1);
+                done();
+            });
+        });
+    });
+    describe('Nested', function () {
+        it('should find nested numbers with the property type === `data`', function (done) {
+            lib.findNumbersByKey('data', json.nested, [], function (err, results) {
+                results.forEach(function (num) {
+                    expect(num).toBeAn('number');
+                    expect(num).toMatch(15);
+                });
+                expect(results.length).toBeLessThanOrEqualTo(3);
+                done();
+            });
+        });
+        it('should find number within an array with the property type === `data`', function (done) {
+            lib.findNumbersByKey('data', json.inArray, [], function (err, results) {
+                results.forEach(function (num) {
+                    expect(num).toBeAn('number');
+                });
+                expect(results.length).toBeLessThanOrEqualTo(2);
+                done();
+            });
+        });
+    });
+
+    describe('json object undefined', function () {
+        it('should return error', function (done) {
+            lib.findNumbersByKey('data', json.undefined(), [], function (err, results) {
+                expect(err).toBeTruthy();
+                expect(results).toBeFalsy();
+                done();
+            });
+        });
+    });
+    describe('json object null', function () {
+        it('should return error', function (done) {
+            lib.findNumbersByKey('data', json.null, [], function (err, results) {
                 expect(err).toBeTruthy();
                 expect(results).toBeFalsy();
                 done();

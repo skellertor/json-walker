@@ -12,8 +12,12 @@ module.exports.topString = {
     data: 'js'
 };
 
+module.exports.topNumber = {
+    data: 15
+};
+
 module.exports.nested = {
-    first: {
+    obj: {
         data: {
             passed: true
         },
@@ -23,13 +27,13 @@ module.exports.nested = {
             }
         }
     },
-    second: {
+    arry: {
         data: [],
         level2: {
             data: []
         }
     },
-    third: {
+    str: {
         data: 'js',
         level2: {
             data: 'js',
@@ -37,11 +41,20 @@ module.exports.nested = {
                 data: 'js'
             }
         }
+    },
+    num: {
+        data: 15,
+        level2: {
+            data: 15,
+            level3: {
+                data: 15
+            }
+        }
     }
 };
 
 module.exports.inArray = {
-    top: [
+    obj: [
         {
             data: {
                 passed: true
@@ -61,14 +74,23 @@ module.exports.inArray = {
             data: []
         }
     ],
-    bottom: [
+    str: [
         {
             data: 'js'
         },
         {
             data: 'js'
         }
+    ],
+    num: [
+        {
+            data: 15
+        },
+        {
+            data: 15
+        }
     ]
+
 };
 
 module.exports.undefined = function () {
