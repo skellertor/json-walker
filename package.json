@@ -4,7 +4,7 @@
   "description": "walks json object to find property",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/skellertor/json-walker/issues"
   },
-  "homepage": "https://github.com/skellertor/json-walker#readme"
+  "homepage": "https://github.com/skellertor/json-walker#readme",
+  "dependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^3.2.0"
+  }
 }
