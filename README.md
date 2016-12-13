@@ -64,7 +64,7 @@ Takes three arguments. The first is the property name that your'e looking
 for.  The second is the json object you are looking in. The third is a callback
 function.
 
-_Returns an error object, and a results array containg all matching arrays._
+_Returns an error object, and a results array containing all matching arrays._
 
 ```javascript
 var jw = require('json-walker');
@@ -100,7 +100,7 @@ Takes three arguments. The first is the property name that your'e looking
 for.  The second is the json object you are looking in. The third is a callback
 function.
 
-_Returns an error object, and a results array containg all matching strings._
+_Returns an error object, and a results array containing all matching strings._
 
 ```javascript
 var jw = require('json-walker');
@@ -128,3 +128,36 @@ jw.findStringsByKey('funky', obj, function(err, results){
 });
 ```
     
+### findNumbersByKey(propertyName, jsonObject, function(err, results))
+
+Takes three arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is a callback
+function.
+
+_Returns an error object, and a results array containing all matching numbers._
+
+```javascript
+var jw = require('json-walker');
+var obj = {
+    "top": {
+        "funky": 1
+    },
+    "mid": {
+        "funky": 2
+        
+    },
+    "bottom": {
+        "funky": 3
+    }
+};
+
+jw.findNumbersByKey('funky', obj, function(err, results){
+    /**
+    *   returns the nested arrays
+    *   [
+    *       1, 2, 3
+    *   ]
+    */
+    console.log(results);
+});
+```
