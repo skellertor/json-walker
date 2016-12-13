@@ -8,13 +8,13 @@ a specified property name.
 There are four functions
 ------------------------
 
-### findObjectsByKey(propertyName, jsonObject, function(err, results)
+### findObjectsByKey(propertyName, jsonObject, function(err, results))
 
 Takes three arguments. The first is the property name that your'e looking 
 for.  The second is the json object you are looking in. The third is a callback
 function.
 
-_Returns an error object, and a results array._
+_Returns an error object, and a results array that contains all matching objects._
 
 ```javascript
 var jw = require('json-walker');
@@ -56,3 +56,41 @@ jw.findObjectsByKey('funky', obj, function(err, results){
      */
     console.log(results);
 });
+```
+
+### findArraysBykey(propertyName, jsonObject, function(err, results))
+
+Takes three arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is a callback
+function.
+
+_Returns an error object, and a results array containg all matching arrays._
+
+```javascript
+var jw = require('json-walker');
+var obj = {
+    "top": {
+        "funky": ["breath", "hair"]
+    },
+    "mid": {
+        "funky": ["bellybutton","underwear"]
+        
+    },
+    "bottom": {
+        "funky": ["feet"]
+    }
+};
+
+jw.findArraysByKey('funky', obj, function(err, results){
+    /**
+    *   returns the nested arrays
+    *   [
+    *       ["breath", "hair"],
+    *       ["bellybutton","underwear"],
+    *       ["feet"]
+    *   ]
+    */
+    console.log(results);
+});
+```
+    
