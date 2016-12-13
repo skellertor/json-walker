@@ -161,3 +161,61 @@ jw.findNumbersByKey('funky', obj, function(err, results){
     console.log(results);
 });
 ```
+
+### findAllByKey(propertyName, jsonObject, function(err, result))
+
+Takes three arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is a callback
+function.
+
+_Returns an error object, and a results array containing all matching properties._
+
+```javascript
+var jw = require('json-walker');
+var obj = {
+    "obj": {
+        "funky": {
+            passed: true
+        },
+        "level2": {
+            "funky": {
+                "passed": true
+            }
+        }
+    },
+    "arry": {
+        "funky": [],
+        "level2": {
+            "funky": []
+        }
+    },
+    "str": {
+        "funky": "js",
+        "level2": {
+            "funky": "js",
+            "level3": {
+                "funky": "js"
+            }
+        }
+    },
+    "num": {
+        "funky": 15,
+        "level2": {
+            "funky": 15,
+            "level3": {
+                "funky": 15
+            }
+        }
+    }
+};
+
+jw.findAllByKey('funky', obj, function(err, results){
+    /**
+    *   returns the nested arrays
+    *   [
+    *       {"passed":true},{"passed":true},[],[],"js","js","js",15,15,15
+    *   ]
+    */
+    console.log(results);
+});
+```

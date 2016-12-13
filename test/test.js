@@ -255,3 +255,18 @@ describe('findNumbersByKey()', function () {
         });
     });
 });
+
+/*******************************************
+ * Section for findAllByKey() function *
+ *******************************************/
+
+describe('findAllByKey()', function () {
+    describe('Top level and nested', function () {
+        it('should find all properties with the property name === `data`', function (done) {
+            lib.findAllByKey('data', json.nested, function (err, results) {
+                expect(results.length).toBeLessThanOrEqualTo(10);
+                done();
+            });
+        });
+    });
+});
