@@ -117,7 +117,7 @@ var obj = {
     }
 };
 
-jw.findArraysByKey('funky', obj, function(err, results){
+jw.findStringsByKey('funky', obj, function(err, results){
     /**
     *   returns the nested arrays
     *   [
