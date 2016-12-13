@@ -119,7 +119,7 @@ var obj = {
 
 jw.findStringsByKey('funky', obj, function(err, results){
     /**
-    *   returns the nested arrays
+    *   returns the nested strings
     *   [
     *       "breath", "bellybutton", "feet"
     *   ]
@@ -153,7 +153,7 @@ var obj = {
 
 jw.findNumbersByKey('funky', obj, function(err, results){
     /**
-    *   returns the nested arrays
+    *   returns the nested numbers
     *   [
     *       1, 2, 3
     *   ]
@@ -211,7 +211,7 @@ var obj = {
 
 jw.findAllByKey('funky', obj, function(err, results){
     /**
-    *   returns the nested arrays
+    *   returns all properties of the same name
     *   [
     *       {"passed":true},{"passed":true},[],[],"js","js","js",15,15,15
     *   ]
