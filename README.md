@@ -58,7 +58,7 @@ jw.findObjectsByKey('funky', obj, function(err, results){
 });
 ```
 
-### findArraysBykey(propertyName, jsonObject, function(err, results))
+### findArraysByKey(propertyName, jsonObject, function(err, results))
 
 Takes three arguments. The first is the property name that your'e looking 
 for.  The second is the json object you are looking in. The third is a callback
@@ -88,6 +88,40 @@ jw.findArraysByKey('funky', obj, function(err, results){
     *       ["breath", "hair"],
     *       ["bellybutton","underwear"],
     *       ["feet"]
+    *   ]
+    */
+    console.log(results);
+});
+```
+
+### findStringsByKey(propertyName, jsonObject, function(err, results))
+
+Takes three arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is a callback
+function.
+
+_Returns an error object, and a results array containg all matching strings._
+
+```javascript
+var jw = require('json-walker');
+var obj = {
+    "top": {
+        "funky": "breath"
+    },
+    "mid": {
+        "funky": "bellybutton"
+        
+    },
+    "bottom": {
+        "funky": "feet"
+    }
+};
+
+jw.findArraysByKey('funky', obj, function(err, results){
+    /**
+    *   returns the nested arrays
+    *   [
+    *       "breath", "bellybutton", "feet"
     *   ]
     */
     console.log(results);
