@@ -54,7 +54,7 @@ module.exports.findArraysByKey = function(tag, json, done, results) {
             if (json[keys[i]] instanceof Array && keys[i] === tag) {
                 results.push(json[keys[i]])
             }
-            this.findArraysByKey(tag, json[keys[i]], function (err, res) {})
+            this.findArraysByKey(tag, json[keys[i]], function (err, res) {}, results)
         }
     }
     done(null, results);
@@ -78,7 +78,7 @@ module.exports.findStringsByKey = function (tag, json, done, results) {
     for (let i = 0; i < keys.length; i++) {
         let temp = json[keys[i]];
         if (typeof temp === 'object') {
-            this.findStringsByKey(tag, json[keys[i]], function (err, res) {})
+            this.findStringsByKey(tag, json[keys[i]], function (err, res) {}, results)
         } else if((typeof temp === 'string') && keys[i] === tag){
             results.push(json[keys[i]]);
         }
@@ -104,7 +104,7 @@ module.exports.findNumbersByKey = function (tag, json, done, results) {
     for (let i = 0; i < keys.length; i++) {
         let temp = json[keys[i]];
         if (typeof temp === 'object') {
-            this.findNumbersByKey(tag, json[keys[i]], function (err, res) {})
+            this.findNumbersByKey(tag, json[keys[i]], function (err, res) {}, results)
         } else if((typeof temp === 'number') && keys[i] === tag){
             results.push(json[keys[i]]);
         }
