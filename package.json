@@ -1,6 +1,6 @@
 {
   "name": "json-walker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "walks json object to find property",
   "main": "index.js",
   "scripts": {
