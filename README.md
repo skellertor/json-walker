@@ -5,7 +5,7 @@ This module finds json properties by name.  The property can be on the top
 level or nested.  You can look for Arrays, Objects, Numbers, or Strings with
 a specified property name.
 
-There are four functions
+There are five functions
 ------------------------
 
 ### findObjectsByKey(propertyName, jsonObject, function(err, results))
