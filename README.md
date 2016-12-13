@@ -6,6 +6,16 @@ level or nested.  You can look for Arrays, Objects, Numbers, or Strings with
 a specified property name.
 
 There are four functions
+------------------------
+
+### findObjectsByKey(propertyName, jsonObject, function(err, results)
+
+Takes three arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is a callback
+function.
+
+_Returns an error object, and a results array._
+
 ```javascript
 var jw = require('json-walker');
 var obj = {
