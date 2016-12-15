@@ -16,6 +16,10 @@ module.exports.topNumber = {
     data: 15
 };
 
+module.exports.topBoolean = {
+    data: false
+};
+
 module.exports.nested = {
     obj: {
         data: {
@@ -48,6 +52,15 @@ module.exports.nested = {
             data: 15,
             level3: {
                 data: 15
+            }
+        }
+    },
+    bool: {
+        data: false,
+        level2: {
+            data: false,
+            level3: {
+                data: false
             }
         }
     }
@@ -88,6 +101,14 @@ module.exports.inArray = {
         },
         {
             data: 15
+        }
+    ],
+    bool: [
+        {
+            data: false
+        },
+        {
+            data: false
         }
     ]
 

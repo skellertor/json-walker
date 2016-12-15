@@ -256,15 +256,72 @@ describe('findNumbersByKey()', function () {
     });
 });
 
-/*******************************************
+/********************************************
+ * Section for findBooleansByKey() function *
+ ********************************************/
+
+describe('findBooleansByKey()', function () {
+    describe('Top level', function () {
+        it('should find a boolean with the property name === `data`', function (done) {
+            lib.findBooleansByKey('data', json.topBoolean,  function (err, results) {
+                results.forEach(function (bool) {
+                    expect(bool).toBe(false);
+                });
+                expect(results.length).toBeLessThanOrEqualTo(1);
+                done();
+            });
+        });
+    });
+    describe('Nested', function () {
+        it('should find nested booleans with the property type === `data`', function (done) {
+            lib.findBooleansByKey('data', json.nested,  function (err, results) {
+                results.forEach(function (bool) {
+                    expect(bool).toBe(false);
+                });
+                expect(results.length).toBeLessThanOrEqualTo(3);
+                done();
+            });
+        });
+        it('should find booleans within an array with the property type === `data`', function (done) {
+            lib.findBooleansByKey('data', json.inArray,  function (err, results) {
+                results.forEach(function (bool) {
+                    expect(bool).toBe(false);
+                });
+                expect(results.length).toBeLessThanOrEqualTo(2);
+                done();
+            });
+        });
+    });
+
+    describe('json object undefined', function () {
+        it('should return error', function (done) {
+            lib.findBooleansByKey('data', json.undefined(),  function (err, results) {
+                expect(err).toBeTruthy();
+                expect(results).toBeFalsy();
+                done();
+            });
+        });
+    });
+    describe('json object null', function () {
+        it('should return error', function (done) {
+            lib.findBooleansByKey('data', json.null,  function (err, results) {
+                expect(err).toBeTruthy();
+                expect(results).toBeFalsy();
+                done();
+            });
+        });
+    });
+});
+
+/***************************************
  * Section for findAllByKey() function *
- *******************************************/
+ ***************************************/
 
 describe('findAllByKey()', function () {
     describe('Top level and nested', function () {
         it('should find all properties with the property name === `data`', function (done) {
             lib.findAllByKey('data', json.nested, function (err, results) {
-                expect(results.length).toBeLessThanOrEqualTo(10);
+                expect(results.length).toBeLessThanOrEqualTo(13);
                 done();
             });
         });
