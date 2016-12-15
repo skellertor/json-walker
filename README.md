@@ -162,6 +162,39 @@ jw.findNumbersByKey('funky', obj, function(err, results){
 });
 ```
 
+### findBooleansByKey(propertyName, jsonObject, function(err, result))
+
+Takes three arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is a callback
+function.
+
+_Returns an error object, and a results array containing all booleans._
+
+```javascript
+var jw = require('json-walker');
+var obj = {
+    "top": {
+        "funky": false
+    },
+    "mid": {
+        "funky": true
+        
+    },
+    "bottom": {
+        "funky": false
+    }
+};
+jw.findBooleansByKey('funky', obj, function(err, results){
+    /**
+    *   returns all properties of the same name
+    *   [
+    *       false,true,false
+    *   ]
+    */
+    console.log(results);
+});
+```
+
 ### findAllByKey(propertyName, jsonObject, function(err, result))
 
 Takes three arguments. The first is the property name that your'e looking 
