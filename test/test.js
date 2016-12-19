@@ -327,3 +327,25 @@ describe('findAllByKey()', function () {
         });
     });
 });
+
+/**********************************
+ * Section for setBooleansByKey() *
+ **********************************/
+
+describe('setBooleansByKey', function () {
+    it('should set boolean value to new value', function (done) {
+        lib.setBooleanByKey('data', json.topBoolean, true, function (err, modified) {
+            expect(modified.data).toBeAn('boolean');
+            expect(modified.data).toBe(true);
+            done();
+        });
+    });
+    it('should set nested boolean value to new value', function (done) {
+        lib.setBooleanByKey('data', json.nested, true, function (err, modified) {
+            expect(modified.bool.data).toBe(true);
+            expect(modified.bool.level2.data).toBe(true);
+            expect(modified.bool.level2.level3.data).toBe(true);
+            done();
+        });
+    });
+});
