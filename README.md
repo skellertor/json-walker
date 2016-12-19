@@ -252,3 +252,5 @@ jw.findAllByKey('funky', obj, function(err, results){
     console.log(results);
 });
 ```
+
+//TODO: Finish the ability to set values for nested properties
