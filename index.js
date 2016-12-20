@@ -213,3 +213,28 @@ module.exports.setObjectsByKey= function(tag, json, newval, done){
     }
     done(null, json);
 };
+
+module.exports.setArraysByKey = function (tag, json, newval, done) {
+    if(!permitted(tag)) return done(new Error('First argument must be a string'), null);
+    if(!(newval instanceof Array)) return done(new Error('Third argument must match same type - Array'));
+
+    let keys,
+        type = typeof json;
+    try {
+        if(type === 'string' || type === 'number' || type === 'function'){
+            throw new Error('Second argument must be an Array or Object');
+        }
+        keys = Object.keys(json);
+    } catch (err) {
+        return done(err, null);
+    }
+    for (let i = 0; i < keys.length; i++) {
+        if (typeof json[keys[i]] === 'object') {
+            if (json[keys[i]] instanceof Array && keys[i] === tag) {
+                json[keys[i]] = newval;
+            }
+            this.setArraysByKey(tag, json[keys[i]], newval, function (err, res) {})
+        }
+    }
+    done(null, json);
+};

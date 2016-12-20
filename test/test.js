@@ -368,7 +368,7 @@ describe('setBooleansByKey', function () {
  *********************************/
 
 describe('setObjectsByKey', function () {
-    it('should set object property to new value', function (done) {
+    it('should set top level property to new value', function (done) {
         lib.setObjectsByKey('data', json.topObject, { frank: true}, function (err, modified) {
             expect(modified.data).toEqual({frank: true});
             done();
@@ -393,5 +393,37 @@ describe('setObjectsByKey', function () {
             expect(modified.obj[1].data).toEqual({modified: true});
             done();
         });
+    });
+});
+
+/*****************************************
+ * Section for setArraysByKey() function *
+ *****************************************/
+
+describe('setArraysByKey()', function () {
+    it('should set top level property to new value', function (done) {
+        lib.setArraysByKey('data', json.topArray, [{modified: true}], function (err, modified) {
+            expect(modified.data[0]).toEqual({modified: true});
+            done();
+        });
+    });
+    it('should get error not passing in array as new value', function (done) {
+        lib.setArraysByKey('data', json.topArray, {modified: true}, function (err, modified) {
+            expect(err).toExist();
+            done();
+        });
+    });
+    it('should set nested properties to new value', function (done) {
+        lib.setArraysByKey('data', json.nested, [{modified: true}], function (err, modified) {
+            expect(modified.arry.data[0]).toEqual({modified: true});
+            expect(modified.arry.level2.data[0]).toEqual({modified: true});
+            done();
+         });
+    });
+    it('should set properties in array to new value', function (done) {
+        lib.setArraysByKey('data', json.inArray, [{modified: true}], function (err, modified) {
+            expect(modified.data[0]).toEqual({modified: true});
+            done();
+        })
     });
 });
