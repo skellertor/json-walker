@@ -13,6 +13,27 @@ a specified property name.
 
 \* If their are multiple properties of the same name and type, `json-walker` will find/set all of them.
 
+# Full example
+```javascript
+var jw = require('json-walker'),
+    fs = require('fs');
+    
+fs.readFile('stuff.json', function(err, data){
+    var jsonObj = JSON.parse(data);
+    jw.findBooleansByKey('isGood', jsonObj, function(err, results){
+        if(results.length && results[0] === false) {
+            jw.setBooleansByKey('isGood', jsonObj, true, function(err, modified){
+                fs.writeFile('stuff.json', JSON.stringify(modified), function(err){
+                    console.log('Modified value saved');
+                });
+            });
+        } else {
+            console.log('No boolean value with the \'isGood\' key!');
+        }
+    });
+});
+```
+
 Finding functions
 -----------------
 
