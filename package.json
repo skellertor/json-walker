@@ -1,7 +1,7 @@
 {
   "name": "json-walker",
   "version": "1.0.15",
-  "description": "walks json object to find property",
+  "description": "walks json object to find a property or set a property",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec"
