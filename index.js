@@ -238,3 +238,53 @@ module.exports.setArraysByKey = function (tag, json, newval, done) {
     }
     done(null, json);
 };
+
+module.exports.setStringsByKey = function (tag, json, newval, done) {
+    if(!permitted(tag)) return done(new Error('First argument must be a string'), null);
+    if(typeof newval !== 'string') return done(new Error('Third argument must match same type - String'));
+
+    let keys,
+        type = typeof json;
+    try {
+        if(type === 'string' || type === 'number' || type === 'function'){
+            throw new Error('Second argument must be an Array or Object');
+        }
+        keys = Object.keys(json);
+    } catch (err){
+        return done(err, null);
+    }
+    for (let i = 0; i < keys.length; i++) {
+        let temp = json[keys[i]];
+        if (typeof temp === 'object') {
+            this.setStringsByKey(tag, json[keys[i]], newval, function (err, res) {})
+        } else if((typeof temp === 'string') && keys[i] === tag){
+            json[keys[i]] = newval;
+        }
+    }
+    done(null, json);
+};
+
+module.exports.setNumbersByKey = function (tag, json, newval, done) {
+    if(!permitted(tag)) return done(new Error('First argument must be a string'), null);
+    if(typeof newval !== 'number') return done(new Error('Third argument must match same type - String'));
+
+    let keys,
+        type = typeof json;
+    try {
+        if(type === 'string' || type === 'number' || type === 'function'){
+            throw new Error('Second argument must be an Array or Object');
+        }
+        keys = Object.keys(json);
+    } catch (err){
+        return done(err, null);
+    }
+    for (let i = 0; i < keys.length; i++) {
+        let temp = json[keys[i]];
+        if (typeof temp === 'object') {
+            this.setNumbersByKey(tag, json[keys[i]], newval, function (err, res) {})
+        } else if((typeof temp === 'number') && keys[i] === tag){
+            json[keys[i]] = newval;
+        }
+    }
+    done(null, json);
+};

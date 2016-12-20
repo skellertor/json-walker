@@ -1,12 +1,20 @@
 **To install from npm:**
-```npm install json-walker```
+```npm install --save json-walker```
 
-This module finds json properties by name.  The property can be on the top
-level or nested.  You can look for Arrays, Objects, Numbers, or Strings with
+This module does two things.
+
+1. Finds json properties by name.  The property can be on the top
+level or nested.  You can look for Arrays, Objects, Numbers, Booleans, or Strings with
 a specified property name.
 
-There are five functions
-------------------------
+2. Sets json properties by name. The property can be on the top
+level or nested.  You can set Arrays, Objects, Numbers, Booleans, or Strings with
+a specified property name.
+
+\* If their are multiple properties of the same name and type, `json-walker` will find/set all of them.
+
+Finding functions
+-----------------
 
 ### findObjectsByKey(propertyName, jsonObject, function(err, results))
 
@@ -253,4 +261,143 @@ jw.findAllByKey('funky', obj, function(err, results){
 });
 ```
 
-//TODO: Finish the ability to set values for nested properties
+Setting functions
+-----------------
+
+### setObjectsByKey(propertyName, jsonObject, newValue, function(err, modifiedJsonObject))
+
+Takes four arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is the new value. (The new value must be of the same type)
+The fourth is a callback function.
+
+_Returns an error object, and the modified object._
+
+```javascript
+var jw = require('json-walker');
+
+var obj = { 
+    funky: {
+        modified: false
+    }
+};
+
+jw.setObjectsByKey('funky', obj, { modified: true }, function(err, modified){
+    /**
+    *   returns modified object
+    *   {
+    *       funky: {
+    *           modified: true
+    *       }
+    *   }
+    */
+    console.log(modified);
+});
+```
+
+### setArraysByKey(propertyName, jsonObject, newValue, function(err, modified))
+
+Takes four arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is the new value. (The new value must be of the same type)
+The fourth is a callback function.
+
+_Returns an error object, and the modified object._
+
+```javascript
+var jw = require('json-walker');
+
+var obj = { 
+    funky: [
+        1,2,3,4
+    ]
+};
+
+jw.setObjectsByKey('funky', obj, [4,3,2,1], function(err, modified){
+    /**
+    *   returns modified object
+    *   {
+    *       funky: [
+    *           4,3,2,1
+    *       ]
+    *   }
+    */
+    console.log(modified);
+});
+```
+
+### setStringsByKey(propertyName, jsonObject, newValue, function(err, modified))
+
+Takes four arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is the new value. (The new value must be of the same type)
+The fourth is a callback function.
+
+_Returns an error object, and the modified object._
+
+```javascript
+var jw = require('json-walker');
+
+var obj = { 
+    funky: 'one'
+};
+
+jw.setObjectsByKey('funky', obj, 'two', function(err, modified){
+    /**
+    *   returns modified object
+    *   {
+    *       funky: 'two'
+    *   }
+    */
+    console.log(modified);
+});
+```
+
+### setNumbersByKey(propertyName, jsonObject, newValue, function(err, modified))
+
+Takes four arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is the new value. (The new value must be of the same type)
+The fourth is a callback function.
+
+_Returns an error object, and the modified object._
+
+```javascript
+var jw = require('json-walker');
+
+var obj = { 
+    funky: 15
+};
+
+jw.setObjectsByKey('funky', obj, 42, function(err, modified){
+    /**
+    *   returns modified object
+    *   {
+    *       funky: 42
+    *   }
+    */
+    console.log(modified);
+});
+```
+
+### setBooleansByKey(propertyName, jsonObject, newValue, function(err, modified))
+
+Takes four arguments. The first is the property name that your'e looking 
+for.  The second is the json object you are looking in. The third is the new value. (The new value must be of the same type)
+The fourth is a callback function.
+
+_Returns an error object, and the modified object._
+
+```javascript
+var jw = require('json-walker');
+
+var obj = { 
+    funky: false
+};
+
+jw.setObjectsByKey('funky', obj, true, function(err, modified){
+    /**
+    *   returns modified object
+    *   {
+    *       funky: true
+    *   }
+    */
+    console.log(modified);
+});
+```
